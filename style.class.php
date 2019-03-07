@@ -18,7 +18,7 @@ class DirList{
 				th         { font-weight: bold; padding-right: 14px; padding-bottom: 3px;}
 				td         {padding-right: 14px;}
 				td.s, th.s {text-align: right;}
-		    	.kanan {text-align: right;padding-left:100px;}
+		    	.kanan {text-align: left;padding-left:100px;}
 		</style>
 		</head>
 		<body>
