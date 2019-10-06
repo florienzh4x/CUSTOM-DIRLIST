@@ -1,7 +1,11 @@
 <?php 
-
 class DirList{
 	public static function List($Dir, $File, $Self){
+		function human_filesize($bytes, $decimals = 2) {
+		    $factor = floor((strlen($bytes) - 1) / 3);
+		    if ($factor > 0) $sz = 'KMGT';
+		    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor - 1] . 'B';
+		}
 		$filename = str_replace($Dir."/", "", $File);
 		echo '<!DOCTYPE html>
 		<html>
@@ -25,7 +29,7 @@ class DirList{
 		<h1>Index of '.str_replace($filename, '', $Self).'</h1><hr><table>';
 		$scan = array_diff(scandir($Dir), array('.', $filename));
 		foreach ($scan as $list) {
-			echo "<tr><td style='padding-right:50px;'>[".strtoupper(filetype($list))."]<td><a href='$list'>$list</a></td><td class='kanan'>".date('F d Y H:i:s', filemtime($list))."</td></tr>";
+			echo "<tr><td style='padding-right:50px;'>[".strtoupper(filetype($list))."]<td><a href='$list'>$list</a></td><td class='kanan'>".human_filesize(filesize($list))." bytes</td><td class='kanan'>".date('F d Y H:i:s', filemtime($list))."</td></tr>";
 		}
 		echo "</table>
 		    <hr> <address>".$_SERVER['SERVER_SOFTWARE']." Server at ".$_SERVER['HTTP_HOST']." Port ".$_SERVER['SERVER_PORT']." - Created by <a href='https://fb.com/florienzh4x' target='_blank'>Florienzh4x</a></address></body></html>";	
